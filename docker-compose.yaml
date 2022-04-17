@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+
+  firacode:
+    image: tonsky/firacode
+    container_name: firacode
+    hostname: firacode
+    volumes:
+      - .:/opt
+    working_dir: /opt
+    # 排除有冲突的
+    # c03..06 i
+    # c07..10 l ss10(FlTlfifjflft) fl不起作用
+    # cv17 ~ ss07(=~!~) 不起作用 (基本上用不到ss07) 不加入排除
+    # cv30 | ss09(>>= <<= ||= |=) ||=, |= 不起作用 (基本上用不到ss09, 不加入排除)
+    # command: ./script/build.sh -f "ss01,ss02,ss04,ss06,ss07,ss08,ss09,ss10,cv01,cv02,cv05,cv09,zero,cv15,cv17,cv18,cv25,cv26,cv28,cv29,cv30,cv32,onum" --family-name "Fira Code"
+    command: ./script/build.sh -f "ss01,ss02,ss04,ss06,ss07,ss08,ss09,ss10,cv01,cv02,zero,cv15,cv17,cv18,cv25,cv26,cv28,cv29,cv30,cv32,onum" --family-name "Fira Code X"
+    # command: ./script/build.sh -f "ss10"
+    # command: bash
+    networks:
+      - default
+
+networks:
+  default:
